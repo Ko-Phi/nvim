@@ -1,4 +1,4 @@
--- luacheck: globals vim
+-- luacheck: globals vim Snacks
 return {
 	{
 		"catppuccin/nvim",
@@ -48,15 +48,22 @@ return {
 						ok = { "italic" },
 					},
 					underlines = {
-						errors = { "underline" },
-						hints = { "underline" },
-						warnings = { "underline" },
-						information = { "underline" },
-						ok = { "underline" },
+						errors = { "undercurl" },
+						hints = { "undercurl" },
+						warnings = { "undercurl" },
+						information = { "undercurl" },
+						ok = { "undercurl" },
 					},
-
 					inlay_hints = {
 						background = true,
+					},
+				},
+				color_overrides = {
+					mocha = {
+						mauve = "#D2B5F8",
+						sky = "#A9D8ED",
+						green = "#CCEAC3",
+						teal = "#A1EDE3",
 					},
 				},
 				custom_highlights = function(colors)
@@ -64,15 +71,15 @@ return {
 						["@constructor"] = { fg = colors.lavender },
 						["@module"] = { bold = true, fg = colors.pink },
 						["@variable.parameter.haskell"] = { fg = colors.text },
+						["@function.builtin"] = { fg = colors.mauve },
+						["@variable.builtin"] = { fg = colors.rosewater },
+						["@constant.builtin"] = { fg = colors.mauve },
+						["@variable.parameter"] = { fg = colors.flamingo },
 						["Type"] = { fg = colors.pink },
-						["@operator"] = { fg = "#A9D8ED" },
-						["Character"] = { fg = "#A1EDE3" },
-						["String"] = { fg = "#CCEAC3" },
-						-- ["Number"] = { fg = "#F9CCB3" },
-						["Number"] = { fg = "#CCEAC3" },
-						["Boolean"] = { fg = "#CCEAC3" },
-						--["Keyword"] = { fg = "#D2B5F8" },
-						["@_name"] = { fg = colors.blue },
+						["Constant"] = { fg = colors.flamingo },
+						["Character"] = { fg = colors.teal },
+						["Number"] = { fg = colors.green },
+						["Boolean"] = { fg = colors.green },
 					}
 				end,
 				default_integrations = true,
@@ -111,6 +118,9 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
+			-- local function workingDir()
+			-- 	return string.format("  %s", vim.cmd(""))
+			-- end
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
@@ -148,6 +158,7 @@ return {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
 					lualine_c = {
+						-- workingDir,
 						"diagnostics",
 						{
 							"filetype",
@@ -171,21 +182,7 @@ return {
 						  cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
 						  color = function() return { fg = Snacks.util.color("Constant") } end,
 						},
-						{
-							"diff",
-							colored = true, -- Displays a colored diff status if set to true
-							diff_color = {
-								-- Same color values as the general color option can be used here.
-								added = "LuaLineDiffAdd", -- Changes the diff's added color
-								modified = "LuaLineDiffChange", -- Changes the diff's modified color
-								removed = "LuaLineDiffDelete", -- Changes the diff's removed color you
-							},
-							symbols = { added = "+", modified = "~", removed = "-" }, -- Changes the symbols used by the diff.
-							source = nil, -- A function that works as a data source for diff.
-							-- It must return a table as such:
-							--   { added = add_count, modified = modified_count, removed = removed_count }
-							-- or nil on failure. count <= 0 won't be displayed.
-						},
+						"diff",
 					},
 					lualine_y = {
 						{ "progress", separator = " ", padding = { left = 1, right = 0 } },
@@ -245,19 +242,7 @@ return {
 				strict = true,
 				variant = "light|dark",
 				blend = 0,
-				override_by_filename = {
-					[".gitignore"] = {
-						icon = "",
-						color = "#f1502f",
-						name = "Gitignore",
-					},
-				},
 				override_by_extension = {
-					["log"] = {
-						icon = "",
-						color = "#81e043",
-						name = "Log",
-					},
 					["js"] = {
 						icon = "",
 						color = "#fab387",
@@ -391,8 +376,20 @@ return {
       { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
       { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
       { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
-      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
-      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+      {
+        "<c-f>",
+        function()
+          if not require("noice.lsp").scroll(4)
+            then return "<c-f>"
+          end
+        end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+      {
+        "<c-b>",
+        function()
+          if not require("noice.lsp").scroll(-4)
+            then return "<c-b>"
+          end
+        end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
     },
 		config = function(_, opts)
 			if vim.o.filetype == "lazy" then
