@@ -86,4 +86,7 @@ return {
 		},
 		opts_extend = { "sources.default" },
 	},
+	{
+		"tpope/vim-surround",
+	},
 }

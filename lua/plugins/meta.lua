@@ -36,8 +36,6 @@ return {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 			bigfile = { enabled = true },
-
-			explorer = { enabled = true },
 			input = { enabled = true },
 			picker = { enabled = true },
 			notifier = { enabled = true },
@@ -49,9 +47,6 @@ return {
 			indent = { enabled = true },
 			dashboard = {
 				preset = {
-					pick = function(cmd, opts)
-						return LazyVim.pick(cmd, opts)()
-					end,
 					header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
@@ -129,23 +124,23 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					map("gd", require("fzf-lua").lsp_definitions, "[G]oto [D]efinition")
+					map("gd", require("fzf-lua").lsp_definitions, "Goto Definition")
 
-					map("gr", require("fzf-lua").lsp_references, "[G]oto [R]eferences")
+					map("gr", require("fzf-lua").lsp_references, "Goto References")
 
-					map("gI", require("fzf-lua").lsp_implementations, "[G]oto [I]mplementation")
+					map("gI", require("fzf-lua").lsp_implementations, "Goto Implementation")
 
-					map("<leader>D", require("fzf-lua").lsp_typedefs, "Type [D]efinition")
+					map("<leader>D", require("fzf-lua").lsp_typedefs, "Type Definition")
 
-					map("<leader>ds", require("fzf-lua").lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("<leader>ds", require("fzf-lua").lsp_document_symbols, "Document Symbols")
 
-					map("<leader>ws", require("fzf-lua").lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
+					map("<leader>ws", require("fzf-lua").lsp_live_workspace_symbols, "Workspace Symbols")
 
-					map("<leader>cr", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("<leader>cr", vim.lsp.buf.rename, "Rename")
 
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
 
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
 					---@param client vim.lsp.Client
 					---@param method vim.lsp.protocol.Method
@@ -206,7 +201,7 @@ return {
 					then
 						map("<leader>th", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "[T]oggle Inlay [H]ints")
+						end, "Toggle Inlay Hints")
 					end
 				end,
 			})
