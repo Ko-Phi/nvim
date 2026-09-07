@@ -16,11 +16,7 @@ return {
 		},
 		opts = {
 			options = {
-        -- stylua: ignore
-        -- close_command = function(n) Snacks.bufdelete(n) end,
-        -- stylua: ignore
-        -- right_mouse_command = function(n) Snacks.bufdelete(n) end,
-        diagnostics = "nvim_lsp",
+				diagnostics = "nvim_lsp",
 				always_show_bufferline = false,
 				offsets = {
 					{
@@ -55,7 +51,7 @@ return {
 		"alexghergh/nvim-tmux-navigation",
 		config = function()
 			require("nvim-tmux-navigation").setup({
-				disable_when_zoomed = true, -- defaults to false
+				disable_when_zoomed = true,
 				keybindings = {
 					left = "<C-h>",
 					down = "<C-j>",
@@ -78,16 +74,13 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- optional, but recommended
+			"nvim-tree/nvim-web-devicons",
 		},
 		lazy = false,
 	},
 	{
 		"ibhagwan/fzf-lua",
-		-- optional for icon support
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		-- or if using mini.icons/mini.nvim
-		-- dependencies = { "nvim-mini/mini.icons" },
 		opts = {},
 		keys = {
 			{

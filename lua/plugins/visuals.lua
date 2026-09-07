@@ -6,40 +6,32 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-				flavour = "mocha", -- latte, frappe, macchiato, mocha
-				background = { -- :h background
+				flavour = "mocha",
+				background = {
 					light = "latte",
 					dark = "mocha",
 				},
-				transparent_background = true, -- disables setting the background color.
+				transparent_background = true,
 				float = {
-					transparent = false, -- enable transparent floating windows
-					solid = false, -- use solid styling for floating windows, see |winborder|
+					transparent = false,
+					solid = false,
 				},
-				term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+				term_colors = false,
 				dim_inactive = {
-					enabled = false, -- dims the background color of inactive window
+					enabled = false,
 					shade = "dark",
-					percentage = 0.15, -- percentage of the shade to apply to the inactive window
+					percentage = 0.15,
 				},
-				no_italic = false, -- Force no italic
-				no_bold = false, -- Force no bold
-				no_underline = false, -- Force no underline
-				styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-					comments = { "italic" }, -- Change the style of comments
+				no_italic = false,
+				no_bold = false,
+				no_underline = false,
+				styles = {
+					comments = { "italic" },
 					conditionals = { "italic" },
-					loops = {},
-					functions = {},
 					keywords = { "italic" },
-					strings = {},
-					variables = {},
-					numbers = {},
-					booleans = {},
-					properties = {},
 					types = { "italic" },
-					operators = {},
 				},
-				lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
+				lsp_styles = {
 					virtual_text = {
 						errors = { "italic" },
 						hints = { "italic" },
@@ -123,9 +115,6 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			-- local function workingDir()
-			-- 	return string.format("  %s", vim.cmd(""))
-			-- end
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
@@ -144,11 +133,10 @@ return {
 						statusline = 1000,
 						tabline = 1000,
 						winbar = 1000,
-						refresh_time = 16, -- ~60fps
+						refresh_time = 16,
 						events = {
 							"WinEnter",
 							"BufEnter",
-							-- "BufWritePost",
 							"SessionLoadPost",
 							"FileChangedShellPost",
 							"VimResized",
@@ -163,7 +151,6 @@ return {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
 					lualine_c = {
-						-- workingDir,
 						"diagnostics",
 						{
 							"filetype",
@@ -274,8 +261,6 @@ return {
 						name = "Haskell",
 					},
 				},
-				-- same as `override` but specifically for operating system
-				-- takes effect when `strict` is true
 				override_by_operating_system = {
 					["apple"] = {
 						icon = "",
@@ -308,32 +293,31 @@ return {
 					untracked = { text = "┆" },
 				},
 				signs_staged_enable = true,
-				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+				signcolumn = true,
+				numhl = false,
+				linehl = false,
+				word_diff = false,
 				watch_gitdir = {
 					follow_files = true,
 				},
 				auto_attach = true,
 				attach_to_untracked = false,
-				current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+				current_line_blame = false,
 				current_line_blame_opts = {
 					virt_text = true,
-					virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+					virt_text_pos = "eol",
 					delay = 1000,
 					ignore_whitespace = false,
 					virt_text_priority = 100,
 					use_focus = true,
 				},
 				current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
-				blame_formatter = nil, -- Use default
+				blame_formatter = nil,
 				sign_priority = 6,
 				update_debounce = 100,
-				status_formatter = nil, -- Use default
-				max_file_length = 40000, -- Disable if file is longer than this (in lines)
+				status_formatter = nil,
+				max_file_length = 40000,
 				preview_config = {
-					-- Options passed to nvim_open_win
 					style = "minimal",
 					relative = "cursor",
 					row = 0,
