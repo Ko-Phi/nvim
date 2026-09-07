@@ -14,6 +14,7 @@ return {
 					json = { "prettierd" },
 					yaml = { "prettierd" },
 					haskell = { "hindent" },
+					typst = { "prettypst" },
 				},
 				format_on_save = {
 					async = false,
